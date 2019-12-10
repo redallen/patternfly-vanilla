@@ -1,0 +1,23 @@
+{
+  "name": "patternfly-vanilla",
+  "version": "0.0.1",
+  "description": "Vanilla webcomponents",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redallen/patternfly-vanilla.git"
+  },
+  "author": "Red Hat",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "@patternfly/patternfly": "^2.44.2"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  }
+}
