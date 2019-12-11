@@ -1,0 +1,19 @@
+{
+  "name": "@patternfly/pwc-styles",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Red Hat",
+  "scripts": {
+    "build:css": "node src/generateClasses.js && tsc && node scripts/removeTS.js"
+  },
+  "dependencies": {
+    "css": "^2.2.3",
+    "typescript": "^3.7.3"
+  },
+  "devDependencies": {
+    "fs-extra": "^8.1.0",
+    "glob": "^7.1.2",
+    "rimraf": "^2.6.2"
+  },
+  "license": "MIT"
+}

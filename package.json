@@ -14,9 +14,8 @@
   },
   "scripts": {
     "build": "lerna run build",
-    "dev": "es-dev-server --node-resolve --preserve-symlinks --open",
-    "start": "concurrently \"yarn dev\" \"yarn watch\"",
-    "postinstall": "lerna bootstrap",
+    "dev": "es-dev-server --preserve-symlinks --node-resolve",
+    "start": "yarn build && concurrently \"yarn dev\" \"yarn watch\"",
     "watch": "lerna run watch"
   },
   "workspaces": [
