@@ -1,23 +1,25 @@
 {
   "name": "patternfly-vanilla",
   "version": "0.0.1",
-  "description": "Vanilla webcomponents",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/redallen/patternfly-vanilla.git"
-  },
-  "author": "Red Hat",
+  "description": "PatternFly LitElement components.",
+  "main": "index.js",
+  "repository": "git@github.com:redallen/patternfly-vanilla",
+  "author": "redallen <zallen@redhat.com>",
   "license": "MIT",
+  "private": true,
   "devDependencies": {
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
-  },
-  "dependencies": {
-    "@patternfly/patternfly": "^2.44.2"
+    "concurrently": "^5.0.1",
+    "es-dev-server": "^1.31.1",
+    "lerna": "^3.19.0"
   },
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack"
-  }
+    "build": "lerna run build",
+    "dev": "es-dev-server --node-resolve --preserve-symlinks --open",
+    "start": "concurrently \"yarn dev\" \"yarn watch\"",
+    "postinstall": "lerna bootstrap",
+    "watch": "lerna run watch"
+  },
+  "workspaces": [
+    "packages/**"
+  ]
 }

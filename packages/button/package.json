@@ -1,0 +1,19 @@
+{
+  "name": "@patternfly/pwc-button",
+  "version": "0.0.1",
+  "description": "PatternFly button web component",
+  "repository": "https://github.com/redallen/patternfly-vanilla.git",
+  "author": "redallen <zallen@redhat.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@patternfly/patternfly": "^2.44.2",
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.2",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "main": "dist/index.js"
+}
