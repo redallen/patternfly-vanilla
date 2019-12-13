@@ -5,4 +5,3 @@ packages/*/*.js
 packages/*/*.js.map
 packages/*/*.d.ts
 assets
-packages/styles/css

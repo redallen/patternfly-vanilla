@@ -19,6 +19,6 @@
     "watch": "lerna run watch"
   },
   "workspaces": [
-    "packages/**"
+    "packages/*"
   ]
 }

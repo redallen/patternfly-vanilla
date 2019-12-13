@@ -1,15 +1,9 @@
-/* eslint-disable global-require,import/no-dynamic-require */
-const camelcase = require('camel-case');
-
 const glob = require('glob');
-const { dirname, basename, resolve, join, parse } = require('path');
-const { readFileSync } = require('fs');
-const { outputFileSync } = require('fs-extra');
-
 const outDir = resolve(__dirname, '../css');
-const pfStylesDir = dirname(require.resolve('@patternfly/patternfly/patternfly.css'));
+// TODO: remove /dist when patternfly-next moves out of repo
+const pfStylesDir = dirname(require.resolve('@patternfly/patternfly/dist/patternfly.css'));
 
-const cssFiles = glob.sync('**/*.css', {
+const cssFiles = glob.sync(`${pfStylesDir}/compone*.css`, {
   cwd: pfStylesDir,
   ignore: ['assets/**', '*ie11*.css']
 });

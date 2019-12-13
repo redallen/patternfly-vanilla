@@ -1,0 +1,3 @@
+[submodule "packages/patternfly-next"]
+	path = packages/patternfly-next
+	url = git@github.com:patternfly/patternfly-next.git
