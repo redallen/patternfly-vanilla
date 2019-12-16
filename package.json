@@ -16,7 +16,7 @@
     "build": "lerna run build",
     "dev": "es-dev-server --preserve-symlinks --node-resolve",
     "start": "yarn build && concurrently \"yarn dev\" \"yarn watch\"",
-    "watch": "lerna run watch"
+    "watch": "lerna run watch --stream --parallel"
   },
   "workspaces": [
     "packages/*"

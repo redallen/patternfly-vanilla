@@ -4,7 +4,7 @@ const CleanCSS = require('clean-css');
 const through2 = require('through2');
 const fs = require('fs-extra');
 // TODO: remove /dist when patternfly-next moves out of repo
-const pfStylesDir = path.dirname(require.resolve('@patternfly/patternfly/dist/patternfly.css'));
+const pfStylesDir = path.dirname(require.resolve('@patternfly/patternfly/package.json'));
 
 const cleaner = new CleanCSS({
   format: 'beautify' // formats output in a really nice way
@@ -12,35 +12,23 @@ const cleaner = new CleanCSS({
 
 const config = {
   sourceFiles: [
-    path.join(pfStylesDir, 'patternfly-base.css'),
-    pfStylesDir + '/**/*.css'
+    path.join(pfStylesDir, '/dist/**/*.css')
   ]
 };
-
-console.log(config.sourceFiles);
 
 function transformCSS0(srcFiles) {
   return srcFiles
     .pipe(
       through2.obj((chunk, _, cb2) => {
-        console.log('chunk', chunk._cwd);
         const cssString = chunk.contents.toString();
 
         const cleaned = cleaner.minify(cssString);
-
         // Not kosher, but prevents path problems
-        const relativePath = path.relative(
-          path.join(chunk._cwd, '/src/patternfly'),
-          chunk.history[0]
-        );
-        console.log(pfStylesDir, chunk.history[0])
-        const outPath = path.join(
-          chunk._cwd,
-          'dist',
-          relativePath.replace(/\.scss$/, '.css')
-        );
-        // fs.ensureFileSync(outPath);
-        // fs.writeFileSync(outPath, cleaned);
+        const outPath = chunk.history[0].replace(pfStylesDir, chunk._cwd).replace(/.css$/, '.js');
+        fs.ensureFileSync(outPath);
+        fs.writeFileSync(outPath, `export default \`
+${cleaned.styles}
+\`;`);
         cb2(null, chunk);
       })
     )
@@ -51,15 +39,11 @@ function transformCSS() {
 }
 
 function watchCSS() {
-  // Initial build
-  module.exports.transformCSS();
-
   const watcher = watch(config.sourceFiles, { delay: 0 });
 
   function transformWatchedCSS(file) {
-    const fullPath = path.join(__dirname, file);
-    transformCSS0(src(fullPath));
-    console.log('Transformed', file);
+    transformCSS0(src(file));
+    console.log('Transformed', file.replace(pfStylesDir, ''));
   }
 
   watcher.on('change', transformWatchedCSS);
